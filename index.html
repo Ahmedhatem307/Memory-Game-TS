@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.css">
+    <script src="main.js" type="module" defer></script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        #board {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            background-image: url("./assets/back.jpg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 8px;
+        }
+
+        img {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="board">
+
+        </div>
+
+    </div>
+</body>
+
+</html>

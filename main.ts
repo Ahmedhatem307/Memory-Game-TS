@@ -1,0 +1,29 @@
+import { Game } from "./game.js";
+
+const CardValues = [
+  1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10,
+];
+
+let game = new Game(CardValues);
+
+console.log(game.board);
+
+const board = document.getElementById("board");
+console.log(board);
+
+game.board.forEach((card, index) => {
+  const cardDiv = document.createElement("div");
+  cardDiv.classList.add("card");
+
+  cardDiv.addEventListener("click", () => {
+    if (!card.isFlipped && !card.isMatched) {
+      card.isFlipped = true;
+      cardDiv.style.background = `url('${card.image}')`;
+      cardDiv.style.backgroundSize = "contain";
+      cardDiv.style.backgroundPosition = "center";
+      cardDiv.style.backgroundRepeat = "no-repeat";
+    }
+  });
+
+  board?.appendChild(cardDiv);
+});
