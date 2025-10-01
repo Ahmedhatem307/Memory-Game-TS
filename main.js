@@ -1,14 +1,15 @@
 import { Game } from "./game.js";
 import { Utils } from "./utils.js";
+let utils = new Utils();
 const CardValues = [
     1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10,
 ];
-let utils = new Utils();
 let shuffledValues = utils.shuffle(CardValues);
 let game = new Game(shuffledValues);
-console.log(game.board);
+let clickCounter = 0;
+let firstCard = null;
+let secondCard = null;
 const board = document.getElementById("board");
-console.log(board);
 game.board.forEach((card) => {
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
@@ -19,7 +20,36 @@ game.board.forEach((card) => {
             cardDiv.style.backgroundSize = "contain";
             cardDiv.style.backgroundPosition = "center";
             cardDiv.style.backgroundRepeat = "no-repeat";
+            if (!firstCard) {
+                firstCard = card;
+                console.log(firstCard);
+            }
+            else {
+                secondCard = card;
+                checkMatch();
+            }
         }
     });
     board === null || board === void 0 ? void 0 : board.appendChild(cardDiv);
 });
+function checkMatch() {
+    if ((firstCard === null || firstCard === void 0 ? void 0 : firstCard.value) === (secondCard === null || secondCard === void 0 ? void 0 : secondCard.value)) {
+        firstCard.isMatched = true;
+        secondCard.isMatched = true;
+        firstCard = null;
+        secondCard = null;
+    }
+    else {
+        setTimeout(() => {
+            var _a, _b;
+            let firstElement = (_a = document.getElementById("board")) === null || _a === void 0 ? void 0 : _a.children[firstCard.id];
+            let secondElement = (_b = document.getElementById("board")) === null || _b === void 0 ? void 0 : _b.children[secondCard.id];
+            firstElement.style.backgroundImage = "url(./assets/back.jpg)";
+            secondElement.style.backgroundImage = "url(./assets/back.jpg)";
+            firstCard.isFlipped = false;
+            secondCard.isFlipped = false;
+            firstCard = null;
+            secondCard = null;
+        }, 1000);
+    }
+}

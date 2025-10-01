@@ -1,10 +1,12 @@
 export class Card {
+  id: number;
   value: string;
   isFlipped: boolean = false;
   isMatched: boolean = false;
   image: string;
 
-  constructor(value: number) {
+  constructor(id: number, value: number) {
+    this.id = id;
     this.value = value.toString();
     this.image = `./assets/images/${value}.jpg`;
   }

@@ -4,6 +4,6 @@ export class Game {
   board: Card[] = [];
 
   constructor(values: number[]) {
-    this.board = values.map((num) => new Card(num));
+    this.board = values.map((num, index) => new Card(index, num));
   }
 }
