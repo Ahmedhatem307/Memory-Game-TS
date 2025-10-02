@@ -19,9 +19,9 @@ const cardMatchSound = new Audio("./assets/audio/good.mp3");
 const gameOverSound = new Audio("./assets/audio/game-over.mp3");
 const board = document.getElementById("board");
 const restartButton = document.getElementById("restart-btn");
-restartButton.addEventListener("click", function () {
-    window.location.reload();
-});
+const resetGame = document.getElementById("reset");
+resetGame.addEventListener("click", restartGame);
+restartButton.addEventListener("click", restartGame);
 game.board.forEach((card) => {
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
@@ -47,8 +47,9 @@ function checkMatch() {
         firstCard.isMatched = true;
         secondCard.isMatched = true;
         progressCounter += 10;
+        console.log(progressCounter);
         progressBar.style.width = `${progressCounter}%`;
-        progressText.innerText = `Progress ${progressCounter} %`;
+        progressText.innerText = `${progressCounter} %`;
         cardMatchSound.play();
         firstCard = null;
         secondCard = null;
@@ -103,4 +104,7 @@ function flipCard(cardDiv, card, showFront) {
         cardDiv.classList.remove("flipping");
         cardDiv.style.transform = "rotateY(0deg)";
     }, 300);
+}
+function restartGame() {
+    window.location.reload();
 }

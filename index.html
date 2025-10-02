@@ -84,14 +84,26 @@
 </head>
 
 <body>
-    <div class="container ">
+    <div class="container">
 
         <div class="background-container d-flex flex-column">
-            <div class="progress m-4">
-                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                    style="width: 0%; color: black;">
-                    <span id="progress-text"></span>
+            <div class="row">
+                <div class="col-2 d-flex justify-content-center align-items-center" style="color: white;">
+                    <h4>Progress</h4>
                 </div>
+                <div class="col-8">
+                    <div class="progress m-4">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                            aria-valuemax="100" style="width: 0%; text-align: center; background-color: green;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-items-center" style="color: white;">
+                    <h4 id="progress-text">0%</h4>
+                </div>
+            </div>
+            <div class="text-center mb-4">
+                <button type="button" class="btn btn-primary" id="reset">Restart</button>
             </div>
             <div id="board">
             </div>
@@ -103,6 +115,9 @@
                 <button id="restart-btn">Play Again</button>
             </div>
         </div>
+
+
+
     </div>
 </body>
 
