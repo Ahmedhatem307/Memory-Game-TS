@@ -9,9 +9,16 @@ const CardValues = [
 
 let shuffledValues = utils.shuffle(CardValues);
 let game = new Game(shuffledValues);
-let clickCounter = 0;
 let firstCard: Card | null = null;
 let secondCard: Card | null = null;
+let lock: boolean = false;
+let progressBar: HTMLElement = document.getElementsByClassName(
+  "progress-bar"
+)[0] as HTMLElement;
+let progressText: HTMLElement = document.getElementById(
+  "progress-text"
+) as HTMLElement;
+let progressCounter: number = 0;
 
 const board = document.getElementById("board");
 
@@ -19,7 +26,7 @@ game.board.forEach((card) => {
   const cardDiv = document.createElement("div");
   cardDiv.classList.add("card");
   cardDiv.addEventListener("click", () => {
-    if (!card.isFlipped && !card.isMatched) {
+    if (!card.isFlipped && !card.isMatched && !lock) {
       card.isFlipped = true;
       cardDiv.style.background = `url('${card.image}')`;
       cardDiv.style.backgroundSize = "contain";
@@ -27,7 +34,6 @@ game.board.forEach((card) => {
       cardDiv.style.backgroundRepeat = "no-repeat";
       if (!firstCard) {
         firstCard = card;
-        console.log(firstCard);
       } else {
         secondCard = card;
         checkMatch();
@@ -42,10 +48,14 @@ function checkMatch() {
   if (firstCard?.value === secondCard?.value) {
     firstCard!.isMatched = true;
     secondCard!.isMatched = true;
-
+    progressCounter += 10;
+    progressBar.style.width = `${progressCounter}%`;
+    progressText.innerText = `Progress ${progressCounter} %`;
     firstCard = null;
     secondCard = null;
+    lock = false;
   } else {
+    lock = true;
     setTimeout(() => {
       let firstElement = document.getElementById("board")?.children[
         firstCard!.id
@@ -62,6 +72,7 @@ function checkMatch() {
 
       firstCard = null;
       secondCard = null;
+      lock = false;
     }, 1000);
   }
 }

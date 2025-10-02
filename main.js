@@ -6,15 +6,18 @@ const CardValues = [
 ];
 let shuffledValues = utils.shuffle(CardValues);
 let game = new Game(shuffledValues);
-let clickCounter = 0;
 let firstCard = null;
 let secondCard = null;
+let lock = false;
+let progressBar = document.getElementsByClassName("progress-bar")[0];
+let progressText = document.getElementById("progress-text");
+let progressCounter = 0;
 const board = document.getElementById("board");
 game.board.forEach((card) => {
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
     cardDiv.addEventListener("click", () => {
-        if (!card.isFlipped && !card.isMatched) {
+        if (!card.isFlipped && !card.isMatched && !lock) {
             card.isFlipped = true;
             cardDiv.style.background = `url('${card.image}')`;
             cardDiv.style.backgroundSize = "contain";
@@ -22,7 +25,6 @@ game.board.forEach((card) => {
             cardDiv.style.backgroundRepeat = "no-repeat";
             if (!firstCard) {
                 firstCard = card;
-                console.log(firstCard);
             }
             else {
                 secondCard = card;
@@ -36,10 +38,15 @@ function checkMatch() {
     if ((firstCard === null || firstCard === void 0 ? void 0 : firstCard.value) === (secondCard === null || secondCard === void 0 ? void 0 : secondCard.value)) {
         firstCard.isMatched = true;
         secondCard.isMatched = true;
+        progressCounter += 10;
+        progressBar.style.width = `${progressCounter}%`;
+        progressText.innerText = `Progress ${progressCounter} %`;
         firstCard = null;
         secondCard = null;
+        lock = false;
     }
     else {
+        lock = true;
         setTimeout(() => {
             var _a, _b;
             let firstElement = (_a = document.getElementById("board")) === null || _a === void 0 ? void 0 : _a.children[firstCard.id];
@@ -50,6 +57,7 @@ function checkMatch() {
             secondCard.isFlipped = false;
             firstCard = null;
             secondCard = null;
+            lock = false;
         }, 1000);
     }
 }
