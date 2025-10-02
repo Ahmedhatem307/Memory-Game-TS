@@ -19,10 +19,7 @@ game.board.forEach((card) => {
     cardDiv.addEventListener("click", () => {
         if (!card.isFlipped && !card.isMatched && !lock) {
             card.isFlipped = true;
-            cardDiv.style.background = `url('${card.image}')`;
-            cardDiv.style.backgroundSize = "contain";
-            cardDiv.style.backgroundPosition = "center";
-            cardDiv.style.backgroundRepeat = "no-repeat";
+            flipCard(cardDiv, card, true);
             if (!firstCard) {
                 firstCard = card;
             }
@@ -51,8 +48,8 @@ function checkMatch() {
             var _a, _b;
             let firstElement = (_a = document.getElementById("board")) === null || _a === void 0 ? void 0 : _a.children[firstCard.id];
             let secondElement = (_b = document.getElementById("board")) === null || _b === void 0 ? void 0 : _b.children[secondCard.id];
-            firstElement.style.backgroundImage = "url(./assets/back.jpg)";
-            secondElement.style.backgroundImage = "url(./assets/back.jpg)";
+            flipCard(firstElement, firstCard, false);
+            flipCard(secondElement, secondCard, false);
             firstCard.isFlipped = false;
             secondCard.isFlipped = false;
             firstCard = null;
@@ -60,4 +57,32 @@ function checkMatch() {
             lock = false;
         }, 1000);
     }
+}
+function flipCard(cardDiv, card, showFront) {
+    cardDiv.classList.add("flipping");
+    if (showFront) {
+        cardDiv.style.transition = "transform 0.3s";
+        cardDiv.style.transform = "rotateY(90deg)";
+    }
+    else {
+        cardDiv.style.transition = "transform 0.3s";
+        cardDiv.style.transform = "rotateY(-90deg)";
+    }
+    setTimeout(() => {
+        if (showFront) {
+            cardDiv.style.background = `url(${card.image})`;
+            cardDiv.style.backgroundSize = "contain";
+            cardDiv.style.backgroundPosition = "center";
+            cardDiv.style.backgroundRepeat = "no-repeat";
+            cardDiv.style.backgroundColor = "white";
+        }
+        else {
+            cardDiv.style.background = "url(./assets/back.jpg)";
+            cardDiv.style.backgroundSize = "contain";
+            cardDiv.style.backgroundPosition = "center";
+            cardDiv.style.backgroundRepeat = "no-repeat";
+        }
+        cardDiv.classList.remove("flipping");
+        cardDiv.style.transform = "rotateY(0deg)";
+    }, 300);
 }
