@@ -53,6 +53,33 @@
         .card.flipping {
             transform: rotateY(90deg);
         }
+
+        .game-over {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            /* dark overlay */
+            display: none;
+            /* hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .game-over-content {
+            background: white;
+            padding: 30px 50px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-over-content h2 {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
@@ -62,7 +89,7 @@
         <div class="background-container d-flex flex-column">
             <div class="progress m-4">
                 <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                    style="width: 0%;">
+                    style="width: 0%; color: black;">
                     <span id="progress-text"></span>
                 </div>
             </div>
@@ -70,6 +97,12 @@
             </div>
         </div>
 
+        <div id="game-over" class="game-over">
+            <div class="game-over-content">
+                <h2>🎉 Game Over 🎉</h2>
+                <button id="restart-btn">Play Again</button>
+            </div>
+        </div>
     </div>
 </body>
 

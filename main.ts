@@ -20,13 +20,26 @@ let progressText: HTMLElement = document.getElementById(
 ) as HTMLElement;
 let progressCounter: number = 0;
 
+const gameTrack = new Audio("./assets/audio/fulltrack.mp3");
+const flipSound = new Audio("./assets/audio/flip.mp3");
+const cardMishmatchSound = new Audio("./assets/audio/fail.mp3");
+const cardMatchSound = new Audio("./assets/audio/good.mp3");
+const gameOverSound = new Audio("./assets/audio/game-over.mp3");
+
 const board = document.getElementById("board");
+
+const restartButton = document.getElementById("restart-btn");
+restartButton!.addEventListener("click", function () {
+  window.location.reload();
+});
 
 game.board.forEach((card) => {
   const cardDiv = document.createElement("div");
   cardDiv.classList.add("card");
   cardDiv.addEventListener("click", () => {
+    gameTrack.play();
     if (!card.isFlipped && !card.isMatched && !lock) {
+      flipSound.play();
       card.isFlipped = true;
       flipCard(cardDiv, card, true);
 
@@ -49,11 +62,19 @@ function checkMatch() {
     progressCounter += 10;
     progressBar.style.width = `${progressCounter}%`;
     progressText.innerText = `Progress ${progressCounter} %`;
+    cardMatchSound.play();
     firstCard = null;
     secondCard = null;
     lock = false;
+
+    if (progressCounter === 100) {
+      gameOverSound.play();
+      const gameOver = document.getElementById("game-over") as HTMLElement;
+      gameOver.style.display = "flex";
+    }
   } else {
     lock = true;
+
     setTimeout(() => {
       let firstElement = document.getElementById("board")?.children[
         firstCard!.id
@@ -71,6 +92,7 @@ function checkMatch() {
       firstCard = null;
       secondCard = null;
       lock = false;
+      cardMishmatchSound.play();
     }, 1000);
   }
 }
