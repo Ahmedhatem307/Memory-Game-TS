@@ -1,3 +1,5 @@
+import { Card } from "./card.js";
+
 export class Utils {
   //Fisher-Yates shuffle algorithm
   shuffle<T>(orderedCards: T[]) {
@@ -15,5 +17,35 @@ export class Utils {
     }
 
     return orderedCards;
+  }
+
+  flipCard(cardDiv: HTMLElement, card: Card, showFront: boolean) {
+    cardDiv.classList.add("flipping");
+
+    if (showFront) {
+      cardDiv.style.transition = "transform 0.3s";
+      cardDiv.style.transform = "rotateY(90deg)";
+    } else {
+      cardDiv.style.transition = "transform 0.3s";
+      cardDiv.style.transform = "rotateY(-90deg)";
+    }
+
+    setTimeout(() => {
+      if (showFront) {
+        cardDiv.style.background = `url(${card.image})`;
+        cardDiv.style.backgroundSize = "cover";
+        cardDiv.style.backgroundPosition = "center";
+        cardDiv.style.backgroundRepeat = "no-repeat";
+        cardDiv.style.backgroundColor = "white";
+      } else {
+        cardDiv.style.background = "url(./assets/back.jpg)";
+        cardDiv.style.backgroundSize = "contain";
+        cardDiv.style.backgroundPosition = "center";
+        cardDiv.style.backgroundRepeat = "no-repeat";
+      }
+
+      cardDiv.classList.remove("flipping");
+      cardDiv.style.transform = "rotateY(0deg)";
+    }, 300);
   }
 }
