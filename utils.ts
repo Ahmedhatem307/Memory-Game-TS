@@ -48,4 +48,16 @@ export class Utils {
       cardDiv.style.transform = "rotateY(0deg)";
     }, 300);
   }
+  preloadImages(urls: string[]) {
+    return Promise.all(
+      urls.map((url) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = url;
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      })
+    );
+  }
 }

@@ -6,6 +6,18 @@ export class Game {
   board: Card[] = [];
   utils = new Utils();
   CardValues = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
+  images = [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "4jpg",
+    "5.jpg",
+    "6.jpg",
+    "7.jpg",
+    "8.jpg",
+    "9.jpg",
+    "10.jpg",
+  ];
   shuffledValues = this.utils.shuffle(this.CardValues);
   firstCard: Card | null = null;
   secondCard: Card | null = null;
@@ -24,7 +36,10 @@ export class Game {
     this.board = this.shuffledValues.map((num, index) => new Card(index, num));
   }
 
-  gameStart() {
+  async gameStart() {
+    // preload all of the images before the game starts
+    await this.utils.preloadImages(this.images);
+
     this.board.forEach((card) => {
       const cardDiv = document.createElement("div");
       cardDiv.classList.add("card");

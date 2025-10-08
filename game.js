@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { Card } from "./card.js";
 import { Utils } from "./utils.js";
 import { GameAudios } from "./gameAudios.js";
@@ -6,6 +15,18 @@ export class Game {
         this.board = [];
         this.utils = new Utils();
         this.CardValues = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
+        this.images = [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg",
+            "10.jpg",
+        ];
         this.shuffledValues = this.utils.shuffle(this.CardValues);
         this.firstCard = null;
         this.secondCard = null;
@@ -18,26 +39,30 @@ export class Game {
         this.board = this.shuffledValues.map((num, index) => new Card(index, num));
     }
     gameStart() {
-        this.board.forEach((card) => {
-            var _a;
-            const cardDiv = document.createElement("div");
-            cardDiv.classList.add("card");
-            cardDiv.addEventListener("click", () => {
-                this.audio.gameTrack.play();
-                if (!card.isFlipped && !card.isMatched && !this.lock) {
-                    this.audio.flipSound.play();
-                    card.isFlipped = true;
-                    this.utils.flipCard(cardDiv, card, true);
-                    if (!this.firstCard) {
-                        this.firstCard = card;
+        return __awaiter(this, void 0, void 0, function* () {
+            // preload all of the images before the game starts
+            yield this.utils.preloadImages(this.images);
+            this.board.forEach((card) => {
+                var _a;
+                const cardDiv = document.createElement("div");
+                cardDiv.classList.add("card");
+                cardDiv.addEventListener("click", () => {
+                    this.audio.gameTrack.play();
+                    if (!card.isFlipped && !card.isMatched && !this.lock) {
+                        this.audio.flipSound.play();
+                        card.isFlipped = true;
+                        this.utils.flipCard(cardDiv, card, true);
+                        if (!this.firstCard) {
+                            this.firstCard = card;
+                        }
+                        else {
+                            this.secondCard = card;
+                            this.checkMatch();
+                        }
                     }
-                    else {
-                        this.secondCard = card;
-                        this.checkMatch();
-                    }
-                }
+                });
+                (_a = this.boardView) === null || _a === void 0 ? void 0 : _a.appendChild(cardDiv);
             });
-            (_a = this.boardView) === null || _a === void 0 ? void 0 : _a.appendChild(cardDiv);
         });
     }
     checkMatch() {
