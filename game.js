@@ -35,6 +35,8 @@ export class Game {
         this.progressBar = document.getElementsByClassName("progress-bar")[0];
         this.progressText = document.getElementById("progress-text");
         this.progressCounter = 0;
+        this.movesCounter = 0;
+        this.movesCounterText = document.getElementById("moves-counter");
         this.audio = new GameAudios();
         this.board = this.shuffledValues.map((num, index) => new Card(index, num));
     }
@@ -48,6 +50,8 @@ export class Game {
                 cardDiv.classList.add("card");
                 cardDiv.addEventListener("click", () => {
                     this.audio.gameTrack.play();
+                    this.movesCounter++;
+                    this.movesCounterText.innerText = this.movesCounter.toString();
                     if (!card.isFlipped && !card.isMatched && !this.lock) {
                         this.audio.flipSound.play();
                         card.isFlipped = true;
@@ -80,7 +84,9 @@ export class Game {
             if (this.progressCounter === 100) {
                 this.audio.gameOverSound.play();
                 const gameOver = document.getElementById("game-over");
+                const gameOverMovesCounter = document.getElementById("game-over-moves");
                 gameOver.style.display = "flex";
+                gameOverMovesCounter.innerText = this.movesCounter.toString();
             }
         }
         else {

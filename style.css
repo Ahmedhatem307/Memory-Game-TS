@@ -1,0 +1,130 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-image: url("assets/tableImage.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 8px;
+  width: 80vw;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  justify-items: center;
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+.card {
+  width: 110px;
+  height: 140px;
+  border: none;
+  background-image: url("./assets/back.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card.flipping {
+  transform: rotateY(90deg);
+}
+
+.game-over {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.game-over-content {
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  padding: 20px;
+  font-size: 0.9rem;
+}
+
+.game-over-content h2 {
+  margin-bottom: 20px;
+}
+
+.game-info {
+  margin: 20px 0px;
+  padding: 15px;
+  border-radius: 3px;
+  border: solid 2px white;
+  color: white;
+}
+
+#moves-counter,
+div > h1 {
+  color: white;
+}
+
+@media screen and (max-width: 1024px) {
+  body {
+    background-attachment: scroll;
+    margin: 0;
+  }
+  .card {
+    width: 90px;
+    height: 120px;
+  }
+
+  #board {
+    width: 90vw;
+    gap: 6px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  body {
+    min-height: 100%;
+    background-attachment: scroll;
+    margin: 0;
+  }
+  .card {
+    width: 60px;
+    height: 100px;
+  }
+  #board {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 1fr auto;
+    gap: 2px;
+    padding: 2px;
+  }
+}

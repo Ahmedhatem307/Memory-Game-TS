@@ -30,6 +30,10 @@ export class Game {
     "progress-text"
   ) as HTMLElement;
   progressCounter: number = 0;
+  movesCounter: number = 0;
+  movesCounterText: HTMLElement = document.getElementById(
+    "moves-counter"
+  ) as HTMLElement;
   audio = new GameAudios();
 
   constructor() {
@@ -45,6 +49,8 @@ export class Game {
       cardDiv.classList.add("card");
       cardDiv.addEventListener("click", () => {
         this.audio.gameTrack.play();
+        this.movesCounter++;
+        this.movesCounterText.innerText = this.movesCounter.toString();
         if (!card.isFlipped && !card.isMatched && !this.lock) {
           this.audio.flipSound.play();
           card.isFlipped = true;
@@ -78,7 +84,11 @@ export class Game {
       if (this.progressCounter === 100) {
         this.audio.gameOverSound.play();
         const gameOver = document.getElementById("game-over") as HTMLElement;
+        const gameOverMovesCounter = document.getElementById(
+          "game-over-moves"
+        ) as HTMLElement;
         gameOver.style.display = "flex";
+        gameOverMovesCounter.innerText = this.movesCounter.toString();
       }
     } else {
       this.lock = true;
