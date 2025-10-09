@@ -1,9 +1,9 @@
 export class GameAudios {
-  gameTrack = new Audio("./assets/audio/gameTrack.mp3");
-  flipSound = new Audio("./assets/audio/flip.mp3");
-  cardMismatchSound = new Audio("./assets/audio/fail.mp3");
-  cardMatchSound = new Audio("./assets/audio/success.mp3");
-  gameOverSound = new Audio("./assets/audio/game-over.mp3");
+  gameTrack = new Audio("./src/assets/audio/gameTrack.mp3");
+  flipSound = new Audio("./src/assets/audio/flip.mp3");
+  cardMismatchSound = new Audio("./src/assets/audio/fail.mp3");
+  cardMatchSound = new Audio("./src/assets/audio/success.mp3");
+  gameOverSound = new Audio("./src/assets/audio/game-over.mp3");
 
   constructor() {
     this.gameTrack.loop = true;

@@ -7,16 +7,16 @@ export class Game {
   utils = new Utils();
   CardValues = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
   images = [
-    "./assets/images/1.webp",
-    "./assets/images/2.webp",
-    "./assets/images/3.webp",
-    "./assets/images/4.webp",
-    "./assets/images/5.webp",
-    "./assets/images/6.webp",
-    "./assets/images/7.webp",
-    "./assets/images/8.webp",
-    "./assets/images/9.webp",
-    "./assets/images/10.webp",
+    "./src/assets/images/1.webp",
+    "./src/assets/images/2.webp",
+    "./src/assets/images/3.webp",
+    "./src/assets/images/4.webp",
+    "./src/assets/images/5.webp",
+    "./src/assets/images/6.webp",
+    "./src/assets/images/7.webp",
+    "./src/assets/images/8.webp",
+    "./src/assets/images/9.webp",
+    "./src/assets/images/10.webp",
   ];
   shuffledValues = this.utils.shuffle(this.CardValues);
   firstCard: Card | null = null;
