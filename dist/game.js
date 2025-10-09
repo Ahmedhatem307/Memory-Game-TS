@@ -44,16 +44,17 @@ export class Game {
         return __awaiter(this, void 0, void 0, function* () {
             // preload all of the images before the game starts
             yield this.utils.preloadImages(this.images);
+            yield this.audio.preloadAudios();
             this.board.forEach((card) => {
                 var _a;
                 const cardDiv = document.createElement("div");
                 cardDiv.classList.add("card");
                 cardDiv.addEventListener("click", () => {
-                    this.audio.gameTrack.play();
+                    this.audio.playTrack();
                     this.movesCounter++;
                     this.movesCounterText.innerText = this.movesCounter.toString();
                     if (!card.isFlipped && !card.isMatched && !this.lock) {
-                        this.audio.flipSound.play();
+                        this.audio.playFlipSound();
                         card.isFlipped = true;
                         this.utils.flipCard(cardDiv, card, true);
                         if (!this.firstCard) {
@@ -77,12 +78,13 @@ export class Game {
             this.progressCounter += 10;
             this.progressBar.style.width = `${this.progressCounter}%`;
             this.progressText.innerText = `${this.progressCounter} %`;
-            this.audio.cardMatchSound.play();
+            this.audio.playMatchSound();
+            // this.audio.cardMatchSound.play();
             this.firstCard = null;
             this.secondCard = null;
             this.lock = false;
             if (this.progressCounter === 100) {
-                this.audio.gameOverSound.play();
+                this.audio.playGameOverSound();
                 const gameOver = document.getElementById("game-over");
                 const gameOverMovesCounter = document.getElementById("game-over-moves");
                 gameOver.style.display = "flex";
@@ -102,7 +104,7 @@ export class Game {
                 this.firstCard = null;
                 this.secondCard = null;
                 this.lock = false;
-                this.audio.cardMismatchSound.play();
+                this.audio.playCardMismatchSound();
             }, 1000);
         }
     }
