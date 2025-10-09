@@ -41,9 +41,9 @@ export class Game {
   }
 
   async gameStart() {
-    // preload all of the images before the game starts
+    // preload all of the images & audios before the game starts
     await this.utils.preloadImages(this.images);
-    await this.audio.preloadAudios();
+    this.audio.preloadAudios();
 
     this.board.forEach((card) => {
       const cardDiv = document.createElement("div");
@@ -78,7 +78,6 @@ export class Game {
       this.progressBar.style.width = `${this.progressCounter}%`;
       this.progressText.innerText = `${this.progressCounter} %`;
       this.audio.playMatchSound();
-      // this.audio.cardMatchSound.play();
       this.firstCard = null;
       this.secondCard = null;
       this.lock = false;

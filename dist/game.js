@@ -42,9 +42,9 @@ export class Game {
     }
     gameStart() {
         return __awaiter(this, void 0, void 0, function* () {
-            // preload all of the images before the game starts
+            // preload all of the images & audios before the game starts
             yield this.utils.preloadImages(this.images);
-            yield this.audio.preloadAudios();
+            this.audio.preloadAudios();
             this.board.forEach((card) => {
                 var _a;
                 const cardDiv = document.createElement("div");
@@ -79,7 +79,6 @@ export class Game {
             this.progressBar.style.width = `${this.progressCounter}%`;
             this.progressText.innerText = `${this.progressCounter} %`;
             this.audio.playMatchSound();
-            // this.audio.cardMatchSound.play();
             this.firstCard = null;
             this.secondCard = null;
             this.lock = false;

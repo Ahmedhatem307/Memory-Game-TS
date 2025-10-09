@@ -38,6 +38,7 @@ export class GameAudios {
     let sound = new Audio(this.cardMismatchSound);
     sound.play();
   }
+
   playGameOverSound() {
     let sound = new Audio(this.gameOverSound);
     sound.volume = 0.4;
