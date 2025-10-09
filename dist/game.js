@@ -16,16 +16,16 @@ export class Game {
         this.utils = new Utils();
         this.CardValues = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
         this.images = [
-            "1.jpg",
-            "2.jpg",
-            "3.jpg",
-            "4jpg",
-            "5.jpg",
-            "6.jpg",
-            "7.jpg",
-            "8.jpg",
-            "9.jpg",
-            "10.jpg",
+            "./assets/images/1.webp",
+            "./assets/images/2.webp",
+            "./assets/images/3.webp",
+            "./assets/images/4.webp",
+            "./assets/images/5.webp",
+            "./assets/images/6.webp",
+            "./assets/images/7.webp",
+            "./assets/images/8.webp",
+            "./assets/images/9.webp",
+            "./assets/images/10.webp",
         ];
         this.shuffledValues = this.utils.shuffle(this.CardValues);
         this.firstCard = null;

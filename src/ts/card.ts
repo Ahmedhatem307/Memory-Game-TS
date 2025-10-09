@@ -8,6 +8,6 @@ export class Card {
   constructor(id: number, value: number) {
     this.id = id;
     this.value = value.toString();
-    this.image = `./assets/images/${value}.jpg`;
+    this.image = `./assets/images/${value}.webp`;
   }
 }

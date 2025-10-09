@@ -11,7 +11,7 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  background-image: url("assets/tableImage.jpg");
+  background-image: url("../assets/images/tableImage.webp");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -40,7 +40,7 @@ body {
   width: 110px;
   height: 140px;
   border: none;
-  background-image: url("./assets/back.jpg");
+  background-image: url("../assets/images/back.webp");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

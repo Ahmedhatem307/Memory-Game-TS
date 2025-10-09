@@ -4,6 +4,6 @@ export class Card {
         this.isMatched = false;
         this.id = id;
         this.value = value.toString();
-        this.image = `./assets/images/${value}.jpg`;
+        this.image = `./assets/images/${value}.webp`;
     }
 }

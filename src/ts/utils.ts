@@ -38,7 +38,7 @@ export class Utils {
         cardDiv.style.backgroundRepeat = "no-repeat";
         cardDiv.style.backgroundColor = "white";
       } else {
-        cardDiv.style.background = "url(./assets/back.jpg)";
+        cardDiv.style.background = "url(./assets/images/back.webp)";
         cardDiv.style.backgroundSize = "contain";
         cardDiv.style.backgroundPosition = "center";
         cardDiv.style.backgroundRepeat = "no-repeat";
